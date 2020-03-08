@@ -1,0 +1,24 @@
+cas:
+  server:
+    name: https://sa.rtor.is
+    prefix: ${cas.server.name}/cas
+  authn:
+    pac4j.oidc:
+      - generic:
+          discoveryUri: https://sa.rtor.is/dex/.well-known/openid-configuration
+          id: test-id
+          secret: test-secret
+          clientName: Dex
+          autoRedirect: true
+          principalAttributeId: email
+
+    passwordless:
+      delegatedAuthenticationActivated: true
+      delegatedAuthenticationSelectorScript.location: file:/etc/cas/groovy/DelegatedAuthenticationSelector.groovy
+      accounts.simple.hsartoris: hsartoris@gmail.com
+
+
+
+logging.config: file:/etc/cas/config/log4j2.xml
+
+# cas.authn.accept.users=
